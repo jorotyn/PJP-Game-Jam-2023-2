@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+[DisallowMultipleComponent]
 public class MenuSystem : MonoBehaviour
 {
 	private enum State { Game, Options }
