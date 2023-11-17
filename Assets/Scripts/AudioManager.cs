@@ -27,9 +27,11 @@ public class AudioManager : MMSingleton<AudioManager>
 		set
 		{
 			_musicVolume = value;
-			_musicObject.GetComponent<AudioSource>().volume = value * MasterVolume;
+			if (_musicObject != null)
+				_musicObject.GetComponent<AudioSource>().volume = value * _masterVolume;
 		}
 	}
+
 
 	public void PlayOnce(AudioClip audioClip)
 	{
