@@ -112,5 +112,15 @@ public class PlantGrowthSystem : MonoBehaviour
     {
         numberOfWeeds = Mathf.Max(0, numberOfWeeds - 1);
     }
+
+    public int GetCurrentStage()
+    {
+        return currentStage;
+    }
+
+    public float GetCurrentGrowth()
+    {
+        return currentGrowth;
+    }
     #endregion
 }

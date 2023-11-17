@@ -126,4 +126,11 @@ public class PlantHealthSystem : MonoBehaviour
         }
     }
     #endregion
+
+    #region Public Methods
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
+    #endregion
 }

@@ -99,5 +99,10 @@ public class WeatherSystem : MonoBehaviour
     {
         return currentWeather;
     }
+
+    public float GetWeatherTimeRemaining()
+    {
+        return nextWeatherChange - weatherTimer;
+    }
     #endregion
 }
