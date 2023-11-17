@@ -8,7 +8,7 @@ public class DebugHelper : MonoBehaviour
     [SerializeField] private PlantGrowthSystem plantGrowthSystem;
     [SerializeField] private PlantHealthSystem plantHealthSystem;
 
-    [Header("Text Elements")]
+    [Header("Debug Elements")]
     [SerializeField] private TextMeshProUGUI weatherTypeText;
     [SerializeField] private TextMeshProUGUI weatherTimeRemainingText;
     [SerializeField] private TextMeshProUGUI sunlightLevelText;
@@ -19,103 +19,58 @@ public class DebugHelper : MonoBehaviour
     [SerializeField] private TextMeshProUGUI plantHealthText;
     [SerializeField] private TextMeshProUGUI numberOfWeedsText;
     [SerializeField] private TextMeshProUGUI numberOfWorkersText;
+
+    [Header("Worker Elements")]
+    [SerializeField] private TextMeshProUGUI totalWorkersText;
+    [SerializeField] private TextMeshProUGUI idleWorkersText;
+    [SerializeField] private TextMeshProUGUI workersClearingWeedsText;
+    [SerializeField] private TextMeshProUGUI workersCollectingNutrientsText;
+    [SerializeField] private TextMeshProUGUI workersCollectingWaterText;
+    [SerializeField] private TextMeshProUGUI workersAmplifyingSunlightText;
     #endregion
 
     #region Unity Lifecycle
     private void Update()
     {
-        WeatherSystem.WeatherType currentWeatherType = WeatherSystem.Instance.GetCurrentWeather();
-        UpdateWeatherType(currentWeatherType);
-        UpdateWeatherTimeRemaining(WeatherSystem.Instance.GetWeatherTimeRemaining());
-        UpdateSunlightLevel(ResourceManagementSystem.Instance.GetSunlightLevel());
-        UpdateWaterLevel(ResourceManagementSystem.Instance.GetWaterLevel());
-        UpdateNutrientLevel(ResourceManagementSystem.Instance.GetNutrientLevel());
-        UpdatePlantGrowth(plantGrowthSystem.GetCurrentGrowth());
-        UpdatePlantStage(plantGrowthSystem.GetCurrentStage().ToString());
-        UpdatePlantHealth(plantHealthSystem.GetHealth());
-        UpdateNumberOfWeeds(WeedManager.Instance.GetTotalWeeds());
-        //UpdateNumberOfWorkers();
+        UpdateUI();
     }
     #endregion
 
     #region Private Methods
-    private void UpdateWeatherType(WeatherSystem.WeatherType weatherType)
+    private void UpdateUI()
     {
-        if (weatherTypeText != null)
-        {
-            weatherTypeText.text = "Weather Type: " + weatherType.ToString();
-        }
+        UpdateText(weatherTypeText, "Weather Type: ", WeatherSystem.Instance.GetCurrentWeather().ToString());
+        UpdateText(weatherTimeRemainingText, "Time Remaining: ", WeatherSystem.Instance.GetWeatherTimeRemaining().ToString("F1") + "s");
+        UpdateText(sunlightLevelText, "Sunlight Level: ", ResourceManagementSystem.Instance.GetSunlightLevel().ToString("F1"));
+        UpdateText(waterLevelText, "Water Level: ", ResourceManagementSystem.Instance.GetWaterLevel().ToString("F1"));
+        UpdateText(nutrientLevelText, "Nutrient Level: ", ResourceManagementSystem.Instance.GetNutrientLevel().ToString("F1"));
+        UpdateText(plantGrowthText, "Plant Growth: ", plantGrowthSystem.GetCurrentGrowth().ToString("F1"));
+        UpdateText(plantStageText, "Plant Stage: ", plantGrowthSystem.GetCurrentStage().ToString());
+        UpdateText(plantHealthText, "Plant Health: ", plantHealthSystem.GetHealth().ToString("F1"));
+        UpdateText(numberOfWeedsText, "Number of Weeds: ", WeedManager.Instance.GetTotalWeeds().ToString());
+        UpdateText(numberOfWorkersText, "Number of Workers: ", WorkerManager.Instance.GetTotalWorkers().ToString());
+
+        UpdateWorkerUI();
     }
 
-    private void UpdateWeatherTimeRemaining(float timeRemaining)
+    private void UpdateWorkerUI()
     {
-        if (weatherTimeRemainingText != null)
-        {
-            weatherTimeRemainingText.text = "Time Remaining: " + timeRemaining.ToString("F1") + "s";
-        }
+        WorkerManager workerManager = WorkerManager.Instance;
+        UpdateText(totalWorkersText, "Total Workers: ", workerManager.GetTotalWorkers().ToString());
+        UpdateText(idleWorkersText, "Idle Workers: ", workerManager.GetIdleWorkerCount().ToString());
+        UpdateText(workersClearingWeedsText, "Workers Clearing Weeds: ", workerManager.GetWorkersClearingWeeds().ToString());
+        UpdateText(workersCollectingNutrientsText, "Workers Collecting Nutrients: ", workerManager.GetWorkersCollectingNutrients().ToString());
+        UpdateText(workersCollectingWaterText, "Workers Collecting Water: ", workerManager.GetWorkersCollectingWater().ToString());
+        UpdateText(workersAmplifyingSunlightText, "Workers Amplifying Sunlight: ", workerManager.GetWorkersAmplifyingSunlight().ToString());
     }
+    #endregion
 
-    private void UpdateSunlightLevel(float sunlightLevel)
+    #region Utility Methods
+    private void UpdateText(TextMeshProUGUI textElement, string prefix, string value)
     {
-        if (sunlightLevelText != null)
+        if (textElement != null)
         {
-            sunlightLevelText.text = "Sunlight Level: " + sunlightLevel.ToString("F1");
-        }
-    }
-
-    private void UpdateWaterLevel(float waterLevel)
-    {
-        if (waterLevelText != null)
-        {
-            waterLevelText.text = "Water Level: " + waterLevel.ToString("F1");
-        }
-    }
-
-    private void UpdateNutrientLevel(float nutrientLevel)
-    {
-        if (nutrientLevelText != null)
-        {
-            nutrientLevelText.text = "Nutrient Level: " + nutrientLevel.ToString("F1");
-        }
-    }
-
-    private void UpdatePlantGrowth(float plantGrowth)
-    {
-        if (plantGrowthText != null)
-        {
-            plantGrowthText.text = "Plant Growth: " + plantGrowth.ToString("F1");
-        }
-    }
-
-    private void UpdatePlantStage(string plantStage)
-    {
-        if (plantStageText != null)
-        {
-            plantStageText.text = "Plant Stage: " + plantStage;
-        }
-    }
-
-    private void UpdatePlantHealth(float plantHealth)
-    {
-        if (plantHealthText != null)
-        {
-            plantHealthText.text = "Plant Health: " + plantHealth.ToString("F1");
-        }
-    }
-
-    private void UpdateNumberOfWeeds(int numberOfWeeds)
-    {
-        if (numberOfWeedsText != null)
-        {
-            numberOfWeedsText.text = "Number of Weeds: " + numberOfWeeds;
-        }
-    }
-
-    private void UpdateNumberOfWorkers(int numberOfWorkers)
-    {
-        if (numberOfWorkersText != null)
-        {
-            numberOfWorkersText.text = "Number of Workers: " + numberOfWorkers;
+            textElement.text = prefix + value;
         }
     }
     #endregion
