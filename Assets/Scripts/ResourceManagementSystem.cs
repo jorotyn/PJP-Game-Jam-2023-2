@@ -7,12 +7,18 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     [SerializeField] private float waterConsumptionRate = 1f;
     [SerializeField] private float nutrientConsumptionRate = 1f;
     [SerializeField] private float maxResourceLevel = 100f;
+    [SerializeField] private float rainWaterIncreaseRate = 2f;
+    [SerializeField] private float overcastSunlightReduction = 0.5f;
+    [SerializeField] private float initialWaterLevel = 50f;
+    [SerializeField] private float initialNutrientLevel = 50f;
     #endregion
 
     #region Private Fields
     private float sunlightLevel;
     private float waterLevel;
     private float nutrientLevel;
+    private bool isRaining;
+    private bool isOvercast;
     #endregion
 
     #region Unity Lifecycle
@@ -31,9 +37,8 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     #region Initialization
     private void Initialize()
     {
-        sunlightLevel = 50f;
-        waterLevel = 50f;
-        nutrientLevel = 50f;
+        waterLevel = initialWaterLevel;
+        nutrientLevel = initialNutrientLevel;
     }
     #endregion
 
@@ -41,13 +46,30 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     private void UpdateResources()
     {
         UpdateSunlight();
+        UpdateWaterLevel();
         ConsumeResources();
     }
 
     private void UpdateSunlight()
     {
-        sunlightLevel = Mathf.PingPong(Time.time, maxResourceLevel);
+        if (isOvercast)
+        {
+            sunlightLevel = Mathf.PingPong(Time.time, maxResourceLevel) * (1 - overcastSunlightReduction);
+        }
+        else
+        {
+            sunlightLevel = Mathf.PingPong(Time.time, maxResourceLevel);
+        }
     }
+
+    private void UpdateWaterLevel()
+    {
+        if (isRaining)
+        {
+            waterLevel = Mathf.Clamp(waterLevel + (rainWaterIncreaseRate * Time.deltaTime), 0f, maxResourceLevel);
+        }
+    }
+
 
     private void ConsumeResources()
     {
@@ -65,6 +87,16 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     public void AddNutrients(float amount)
     {
         nutrientLevel = Mathf.Clamp(nutrientLevel + amount, 0f, maxResourceLevel);
+    }
+
+    public void SetRaining(bool raining)
+    {
+        isRaining = raining;
+    }
+
+    public void SetOvercast(bool overcast)
+    {
+        isOvercast = overcast;
     }
 
     public float GetSunlightLevel()

@@ -123,8 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   growthStagesModels: []
   baseGrowthRate: 1
-  sunlightRequirement: 0
-  waterRequirement: 0
+  sunlightRequirement: 100
+  waterRequirement: 20
   nutrientRequirement: 0
   weedGrowthPenalty: 0
 --- !u!114 &6980263936505314260
@@ -139,3 +139,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5efa7d322e7e704688d5e8d845e6a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthRegenerationRate: 5
+  healthDegenerationRate: 5
+  sunlightThreshold: 0
+  waterThreshold: 0
+  sunlightTimeThreshold: 10
+  waterTimeThreshold: 10
+  onHealthDecreaseStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthDecreaseStop:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerLose:
+    m_PersistentCalls:
+      m_Calls: []
