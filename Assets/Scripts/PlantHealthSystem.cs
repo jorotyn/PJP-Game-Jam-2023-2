@@ -34,6 +34,7 @@ public class PlantHealthSystem : MonoBehaviour
 
     private void Update()
     {
+        GetResourceLevels();
         UpdateHealth();
     }
     #endregion
@@ -49,6 +50,12 @@ public class PlantHealthSystem : MonoBehaviour
     #endregion
 
     #region Private Methods
+    private void GetResourceLevels()
+    {
+        sunlightLevel = ResourceManagementSystem.Instance.GetSunlightLevel();
+        waterLevel = ResourceManagementSystem.Instance.GetWaterLevel();
+    }
+
     private void UpdateHealth()
     {
         bool isSunlightBelowThreshold = sunlightLevel <= sunlightThreshold;
@@ -117,18 +124,6 @@ public class PlantHealthSystem : MonoBehaviour
             currentHealth = 0;
             onPlayerLose.Invoke();
         }
-    }
-    #endregion
-
-    #region Public Methods
-    public void SetSunlightLevel(float level)
-    {
-        sunlightLevel = level;
-    }
-
-    public void SetWaterLevel(float level)
-    {
-        waterLevel = level;
     }
     #endregion
 }

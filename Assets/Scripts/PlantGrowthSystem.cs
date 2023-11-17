@@ -28,6 +28,7 @@ public class PlantGrowthSystem : MonoBehaviour
 
     private void Update()
     {
+        GetResourceLevels();
         UpdateGrowth();
         CheckForStageTransition();
     }
@@ -38,9 +39,6 @@ public class PlantGrowthSystem : MonoBehaviour
     {
         currentStage = 0;
         currentGrowth = 0f;
-        sunlightLevel = 100f;
-        waterLevel = 100f;
-        nutrientLevel = 100f;
         numberOfWeeds = 0;
 
         UpdatePlantAppearance();
@@ -48,6 +46,13 @@ public class PlantGrowthSystem : MonoBehaviour
     #endregion
 
     #region Private Methods
+    private void GetResourceLevels()
+    {
+        sunlightLevel = ResourceManagementSystem.Instance.GetSunlightLevel();
+        waterLevel = ResourceManagementSystem.Instance.GetWaterLevel();
+        nutrientLevel = ResourceManagementSystem.Instance.GetNutrientLevel();
+    }
+
     private void UpdateGrowth()
     {
         float growthRate = CalculateGrowthRate();
@@ -98,13 +103,6 @@ public class PlantGrowthSystem : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public void ModifyResourceLevels(float sunlightChange, float waterChange, float nutrientChange)
-    {
-        sunlightLevel += sunlightChange;
-        waterLevel += waterChange;
-        nutrientLevel += nutrientChange;
-    }
-
     public void AddWeed()
     {
         numberOfWeeds++;
