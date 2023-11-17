@@ -30,6 +30,7 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
 
     private void Update()
     {
+        GetWeatherType();
         UpdateResources();
     }
     #endregion
@@ -43,6 +44,12 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     #endregion
 
     #region Private Methods
+    private void GetWeatherType()
+    {
+        isOvercast = WeatherSystem.Instance.GetIsOvercast();
+        isRaining = WeatherSystem.Instance.GetIsRaining();
+    }
+
     private void UpdateResources()
     {
         UpdateSunlight();

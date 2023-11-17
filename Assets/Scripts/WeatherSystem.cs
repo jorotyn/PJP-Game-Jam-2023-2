@@ -1,7 +1,8 @@
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class WeatherSystem : MonoBehaviour
+public class WeatherSystem : MMSingleton<WeatherSystem>
 {
     public enum WeatherType { Sunny, Overcast, Raining }
 
@@ -18,6 +19,8 @@ public class WeatherSystem : MonoBehaviour
     private WeatherType currentWeather;
     private float weatherTimer;
     private float nextWeatherChange;
+    private bool isOvercast;
+    private bool isRaining;
     #endregion
 
     #region Unity Lifecycle
@@ -58,18 +61,18 @@ public class WeatherSystem : MonoBehaviour
         switch (currentWeather)
         {
             case WeatherType.Sunny:
-                ResourceManagementSystem.Instance.SetRaining(false);
-                ResourceManagementSystem.Instance.SetOvercast(false);
+                isRaining = false;
+                isOvercast = false;
                 onSunnyWeatherStart.Invoke();
                 break;
             case WeatherType.Overcast:
-                ResourceManagementSystem.Instance.SetRaining(false);
-                ResourceManagementSystem.Instance.SetOvercast(true);
+                isRaining = false;
+                isOvercast = true;
                 onOvercastWeatherStart.Invoke();
                 break;
             case WeatherType.Raining:
-                ResourceManagementSystem.Instance.SetRaining(true);
-                ResourceManagementSystem.Instance.SetOvercast(true);
+                isRaining = true;
+                isOvercast = true;
                 onRainingWeatherStart.Invoke();
                 break;
         }
@@ -103,6 +106,16 @@ public class WeatherSystem : MonoBehaviour
     public float GetWeatherTimeRemaining()
     {
         return nextWeatherChange - weatherTimer;
+    }
+
+    public bool GetIsOvercast()
+    {
+        return isOvercast;
+    }
+
+    public bool GetIsRaining()
+    {
+        return isRaining;
     }
     #endregion
 }

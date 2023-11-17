@@ -5,7 +5,6 @@ public class DebugHelper : MonoBehaviour
 {
     #region Serialized Fields
     [Header("References")]
-    [SerializeField] private WeatherSystem weatherSystem;
     [SerializeField] private PlantGrowthSystem plantGrowthSystem;
     [SerializeField] private PlantHealthSystem plantHealthSystem;
 
@@ -25,16 +24,16 @@ public class DebugHelper : MonoBehaviour
     #region Unity Lifecycle
     private void Update()
     {
-        WeatherSystem.WeatherType currentWeatherType = weatherSystem.GetCurrentWeather();
+        WeatherSystem.WeatherType currentWeatherType = WeatherSystem.Instance.GetCurrentWeather();
         UpdateWeatherType(currentWeatherType);
-        UpdateWeatherTimeRemaining(weatherSystem.GetWeatherTimeRemaining());
+        UpdateWeatherTimeRemaining(WeatherSystem.Instance.GetWeatherTimeRemaining());
         UpdateSunlightLevel(ResourceManagementSystem.Instance.GetSunlightLevel());
         UpdateWaterLevel(ResourceManagementSystem.Instance.GetWaterLevel());
         UpdateNutrientLevel(ResourceManagementSystem.Instance.GetNutrientLevel());
         UpdatePlantGrowth(plantGrowthSystem.GetCurrentGrowth());
         UpdatePlantStage(plantGrowthSystem.GetCurrentStage().ToString());
         UpdatePlantHealth(plantHealthSystem.GetHealth());
-        //UpdateNumberOfWeeds();
+        UpdateNumberOfWeeds(WeedManager.Instance.GetTotalWeeds());
         //UpdateNumberOfWorkers();
     }
     #endregion
