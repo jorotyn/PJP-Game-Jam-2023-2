@@ -34,17 +34,21 @@ public class Worker : MonoBehaviour
             UpdateTask(assignedTask);
         }
     }
-    #endregion
 
-    #region Public Methods
     public void UpdateTask(WorkerTask newTask)
     {
         if (currentTask != newTask)
         {
             currentTask = newTask;
             WorkerManager.Instance.UpdateWorkerTask(this, newTask);
-            // Additional logic for task change, like updating animations or behavior
         }
+    }
+    #endregion
+
+    #region Public Methods
+    public WorkerTask GetCurrentTask()
+    {
+        return currentTask;
     }
     #endregion
 }

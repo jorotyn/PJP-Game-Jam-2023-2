@@ -84,7 +84,7 @@ public class WorkerManager : MMSingleton<WorkerManager>
         }
         else
         {
-            // Optionally handle the case where the worker is not registered
+            // To do: handle the case where the worker is not registered
         }
     }
 

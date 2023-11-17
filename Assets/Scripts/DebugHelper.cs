@@ -32,12 +32,13 @@ public class DebugHelper : MonoBehaviour
     #region Unity Lifecycle
     private void Update()
     {
-        UpdateUI();
+        UpdateDebugUI();
+        UpdateWorkerUI();
     }
     #endregion
 
     #region Private Methods
-    private void UpdateUI()
+    private void UpdateDebugUI()
     {
         UpdateText(weatherTypeText, "Weather Type: ", WeatherSystem.Instance.GetCurrentWeather().ToString());
         UpdateText(weatherTimeRemainingText, "Time Remaining: ", WeatherSystem.Instance.GetWeatherTimeRemaining().ToString("F1") + "s");
@@ -49,8 +50,6 @@ public class DebugHelper : MonoBehaviour
         UpdateText(plantHealthText, "Plant Health: ", plantHealthSystem.GetHealth().ToString("F1"));
         UpdateText(numberOfWeedsText, "Number of Weeds: ", WeedManager.Instance.GetTotalWeeds().ToString());
         UpdateText(numberOfWorkersText, "Number of Workers: ", WorkerManager.Instance.GetTotalWorkers().ToString());
-
-        UpdateWorkerUI();
     }
 
     private void UpdateWorkerUI()
