@@ -115,7 +115,7 @@ public class WeedManager : MMSingleton<WeedManager>
     {
         if (weedComponents.Contains(weedToRemove))
         {
-            weedComponents.Remove(weedToRemove); // Remove the Weed component from the list
+            weedComponents.Remove(weedToRemove);
             totalWeeds = Mathf.Max(0, totalWeeds - 1);
         }
     }
