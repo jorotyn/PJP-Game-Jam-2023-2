@@ -481,5 +481,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitializationMode: 0
   Label: 
-  minWaitTime: 2
-  maxWaitTime: 5
+  wanderRadius: 5
+  minWanderTimer: 0
+  maxWanderTimer: 5
