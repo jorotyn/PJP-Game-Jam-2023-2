@@ -1,4 +1,5 @@
 using MoreMountains.Tools;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeedManager : MMSingleton<WeedManager>
@@ -16,6 +17,7 @@ public class WeedManager : MMSingleton<WeedManager>
     #endregion
 
     #region Private Fields
+    private List<Weed> weedComponents = new List<Weed>();
     private int totalWeeds;
     private float currentGrowth;
     private float nextSpawnTime;
@@ -87,7 +89,9 @@ public class WeedManager : MMSingleton<WeedManager>
             Random.Range(spawnAreaMin.y, spawnAreaMax.y)
         );
 
-        Instantiate(weedPrefab, spawnPosition, Quaternion.identity, this.transform);
+        GameObject newWeedObject = Instantiate(weedPrefab, spawnPosition, Quaternion.identity, this.transform);
+        Weed newWeedComponent = newWeedObject.GetComponent<Weed>();
+        weedComponents.Add(newWeedComponent);
         totalWeeds++;
         currentGrowth = 0f;
         SetNextSpawnLevel();
@@ -107,14 +111,23 @@ public class WeedManager : MMSingleton<WeedManager>
     #endregion
 
     #region Public Methods
-    public void RemoveWeed()
+    public void RemoveWeed(Weed weedToRemove)
     {
-        totalWeeds = Mathf.Max(0, totalWeeds - 1);
+        if (weedComponents.Contains(weedToRemove))
+        {
+            weedComponents.Remove(weedToRemove); // Remove the Weed component from the list
+            totalWeeds = Mathf.Max(0, totalWeeds - 1);
+        }
     }
 
     public int GetTotalWeeds()
     {
         return totalWeeds;
+    }
+
+    public List<Weed> GetAllWeedComponents()
+    {
+        return weedComponents;
     }
     #endregion
 
