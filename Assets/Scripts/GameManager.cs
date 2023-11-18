@@ -28,7 +28,7 @@ public class GameManager : MMSingleton<GameManager>
 		LoadGameSettings();
 	}
 
-	public void LoadGameSettings()
+	private void LoadGameSettings()
 	{
 		GameSettingsWrapper gameSettings;
 		if (Application.platform == RuntimePlatform.WebGLPlayer)
