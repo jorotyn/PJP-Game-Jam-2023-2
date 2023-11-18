@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class Nutrient : MonoBehaviour
 {
+    #region Serialized Fields
+    [SerializeField] private float nutrientValue = 10f;
+    #endregion
+
     #region Private Fields
-    private AIActionClearWeeds lockingAgent;
+    private AIActionCollectNutrients lockingAgent;
     private bool locked;
     #endregion
 
@@ -19,6 +23,33 @@ public class Nutrient : MonoBehaviour
     public void Interact()
     {
         PickUpNutrient();
+    }
+
+    public void Lock(AIActionCollectNutrients agent)
+    {
+        locked = true;
+        lockingAgent = agent;
+    }
+
+    public void Unlock()
+    {
+        locked = false;
+        lockingAgent = null;
+    }
+
+    public bool IsLocked()
+    {
+        return locked;
+    }
+
+    public AIActionCollectNutrients GetLockingAgent()
+    {
+        return lockingAgent;
+    }
+
+    public float GetNutrientAmount()
+    {
+        return nutrientValue;
     }
     #endregion
 }

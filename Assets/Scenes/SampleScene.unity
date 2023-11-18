@@ -7616,11 +7616,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plant
       objectReference: {fileID: 0}
-    - target: {fileID: 7243358244335709866, guid: 160451156c2df544bb96cf7f6fc6c4a4,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6d49bd7f18b237648b34f628f14f3f08, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
