@@ -47,10 +47,10 @@ MonoBehaviour:
   weedPrefab: {fileID: 9060901498363924049, guid: 5487db59750bd504cb3c22bccf255ff7,
     type: 3}
   baseGrowthRate: 1
-  minSpawnTime: 5
-  maxSpawnTime: 20
+  minSpawnTime: 1
+  maxSpawnTime: 5
   rainSpawnMultiplier: 1.5
   sunSpawnMultiplier: 100
   weedsSpawnMultiplier: 0.1
-  spawnAreaMin: {x: -5, y: -5}
-  spawnAreaMax: {x: 5, y: 5}
+  spawnAreaMin: {x: -23, y: -23}
+  spawnAreaMax: {x: 23, y: 23}
