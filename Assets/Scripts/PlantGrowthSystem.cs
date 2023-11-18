@@ -18,6 +18,7 @@ public class PlantGrowthSystem : MonoBehaviour
     private float waterLevel;
     private float nutrientLevel;
     private int numberOfWeeds;
+    private int numberOfSunlightAmplifiers;
     #endregion
 
     #region Unity Lifecycle
@@ -40,6 +41,7 @@ public class PlantGrowthSystem : MonoBehaviour
         currentStage = 0;
         currentGrowth = 0f;
         numberOfWeeds = 0;
+        numberOfSunlightAmplifiers = 0;
 
         UpdatePlantAppearance();
     }
@@ -51,6 +53,7 @@ public class PlantGrowthSystem : MonoBehaviour
         sunlightLevel = ResourceManagementSystem.Instance.GetSunlightLevel();
         waterLevel = ResourceManagementSystem.Instance.GetWaterLevel();
         nutrientLevel = ResourceManagementSystem.Instance.GetNutrientLevel();
+        numberOfSunlightAmplifiers = ResourceManagementSystem.Instance.GetNumberOfSunlightAmplifiers();
     }
 
     private void UpdateGrowth()
@@ -93,7 +96,9 @@ public class PlantGrowthSystem : MonoBehaviour
         float nutrientMultiplier = (nutrientLevel >= nutrientRequirement) ? 1f : nutrientLevel / nutrientRequirement;
         float weedPenalty = 1f - (numberOfWeeds * weedGrowthPenalty);
 
-        return baseGrowthRate * sunlightMultiplier * waterMultiplier * nutrientMultiplier * weedPenalty;
+        float amplifierEffect = 1f + numberOfSunlightAmplifiers;
+
+        return baseGrowthRate * sunlightMultiplier * waterMultiplier * nutrientMultiplier * weedPenalty * amplifierEffect;
     }
 
     private float GetGrowthThresholdForStage(int stage)

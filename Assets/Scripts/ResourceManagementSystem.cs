@@ -19,6 +19,7 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     private float nutrientLevel;
     private bool isRaining;
     private bool isOvercast;
+    private int countOfSunlightAmplifiers;
     #endregion
 
     #region Unity Lifecycle
@@ -119,6 +120,21 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     public float GetNutrientLevel()
     {
         return nutrientLevel;
+    }
+
+    public int GetNumberOfSunlightAmplifiers()
+    {
+        return countOfSunlightAmplifiers;
+    }
+
+    public void IncrementSunlightAmplifiers()
+    {
+        countOfSunlightAmplifiers++;
+    }
+
+    public void DecrementSunlightAmplifiers()
+    {
+        countOfSunlightAmplifiers--;
     }
     #endregion
 }
