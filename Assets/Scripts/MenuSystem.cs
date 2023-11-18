@@ -60,6 +60,7 @@ public class MenuSystem : MonoBehaviour
 			if (Input.GetKeyDown(_toggleKey))
 				_state = State.Game;
 		}
+		GameManager.Instance.SaveGameSettings();
 		_optionsGroup.SetActive(false);
 		NextState();
 	}

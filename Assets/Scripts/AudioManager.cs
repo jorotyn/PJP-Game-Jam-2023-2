@@ -32,6 +32,17 @@ public class AudioManager : MMSingleton<AudioManager>
 		}
 	}
 
+	public void SetSettings(GameSettingsWrapper settings)
+	{
+		MasterVolume = settings.MasterVolume;
+		MusicVolume = settings.MusicVolume;
+	}
+
+	public void GetSettings(GameSettingsWrapper settings)
+	{
+		settings.MasterVolume = MasterVolume;
+		settings.MusicVolume = MusicVolume;
+	}
 
 	public void PlayOnce(AudioClip audioClip)
 	{

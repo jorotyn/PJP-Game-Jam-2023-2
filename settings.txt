@@ -1,0 +1,4 @@
+{
+    "MasterVolume": 0.0,
+    "MusicVolume": 0.20000000298023225
+}
