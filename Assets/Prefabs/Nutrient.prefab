@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2614552427434643555}
   - component: {fileID: 3653382045412354036}
   - component: {fileID: 5130099923875607998}
-  - component: {fileID: 6997275214353117995}
+  - component: {fileID: 5536049720865159520}
   m_Layer: 0
   m_Name: Nutrient
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6997275214353117995
+--- !u!114 &5536049720865159520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6032445672539693756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c59510033a26674478030f20534131dd, type: 3}
+  m_Script: {fileID: 11500000, guid: ce779b64554e9ac4480dd4cfe18dedc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nutrientValue: 10
