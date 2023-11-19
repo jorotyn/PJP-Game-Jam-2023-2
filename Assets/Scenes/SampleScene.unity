@@ -184,6 +184,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1755498667264459006, guid: f96bb4af1cbb4d7499e6ab05c0159312,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2100663397515438870, guid: f96bb4af1cbb4d7499e6ab05c0159312,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10333,6 +10338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worker (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1755498667264459006, guid: f96bb4af1cbb4d7499e6ab05c0159312,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2100663397515438870, guid: f96bb4af1cbb4d7499e6ab05c0159312,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10400,6 +10410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Worker (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755498667264459006, guid: f96bb4af1cbb4d7499e6ab05c0159312,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2100663397515438870, guid: f96bb4af1cbb4d7499e6ab05c0159312,
         type: 3}

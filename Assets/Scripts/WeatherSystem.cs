@@ -47,6 +47,7 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
         SetRandomWeather();
         SetNextWeatherChange();
         StopRainParticleSystem();
+        weatherChanged = true;
     }
     #endregion
 
