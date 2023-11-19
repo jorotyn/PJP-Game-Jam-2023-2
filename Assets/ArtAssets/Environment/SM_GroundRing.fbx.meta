@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: GroundRing
+    second: {fileID: 2100000, guid: 6196cb1b79ba808439bd6a35dc4e14b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lambert1
     second: {fileID: 2100000, guid: 6196cb1b79ba808439bd6a35dc4e14b4, type: 2}
   materials:

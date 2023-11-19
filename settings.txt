@@ -1,4 +1,4 @@
 {
-    "MasterVolume": 0.0,
-    "MusicVolume": 0.20000000298023225
+    "MasterVolume": 0.7455386519432068,
+    "MusicVolume": 0.0
 }
