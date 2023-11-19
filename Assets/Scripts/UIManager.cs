@@ -5,7 +5,15 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     #region Serialized Fields
-    [Header("Resource Elements")]
+    [Header("References")]
+    [SerializeField] private PlantGrowthSystem plantGrowthSystem;
+    [SerializeField] private PlantHealthSystem plantHealthSystem;
+
+    [Header("Information Elements")]
+    [SerializeField] private TextMeshProUGUI currentWeatherText;
+    [SerializeField] private TextMeshProUGUI plantStageText;
+    [SerializeField] private MMProgressBar growthBar;
+    [SerializeField] private MMProgressBar healthBar;
     [SerializeField] private MMProgressBar sunlightBar;
     [SerializeField] private MMProgressBar waterBar;
     [SerializeField] private MMProgressBar nutrientBar;
@@ -22,14 +30,19 @@ public class UIManager : MonoBehaviour
     #region Unity Lifecycle
     private void Update()
     {
-        UpdateResourceUI();
+        UpdateInformationUI();
         UpdateWorkerUI();
     }
     #endregion
 
     #region Private Methods
-    private void UpdateResourceUI()
+    private void UpdateInformationUI()
     {
+        UpdateText(currentWeatherText, "Weather: ", WeatherSystem.Instance.GetCurrentWeather().ToString());
+        int growthStage = plantGrowthSystem.GetCurrentStage() + 1;
+        UpdateText(plantStageText, "Plant Stage: ", growthStage.ToString());
+        growthBar.SetBar01(plantGrowthSystem.GetCurrentGrowth() / 100f);
+        healthBar.SetBar01(plantHealthSystem.GetHealth() / 100f);
         sunlightBar.SetBar01(ResourceManagementSystem.Instance.GetSunlightLevel() / 100f);
         waterBar.SetBar01(ResourceManagementSystem.Instance.GetWaterLevel() / 100f);
         nutrientBar.SetBar01(ResourceManagementSystem.Instance.GetNutrientLevel() / 100f);

@@ -49,5 +49,5 @@ MonoBehaviour:
   maxResourceLevel: 100
   rainWaterIncreaseRate: 2
   overcastSunlightReduction: 0.5
-  initialWaterLevel: 50
-  initialNutrientLevel: 50
+  initialWaterLevel: 0
+  initialNutrientLevel: 0
