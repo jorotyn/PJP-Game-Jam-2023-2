@@ -130,5 +130,11 @@ public class PlantGrowthSystem : MonoBehaviour
     {
         return currentGrowth;
     }
+
+    public float GetCurrentGrowthNormalized()
+    {
+        float growthThreshold = GetGrowthThresholdForStage(currentStage);
+        return Mathf.Max(0, currentGrowth / growthThreshold);
+    }
     #endregion
 }

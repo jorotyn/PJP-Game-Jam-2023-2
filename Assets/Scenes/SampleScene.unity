@@ -11185,6 +11185,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5763286058632883702, guid: 160451156c2df544bb96cf7f6fc6c4a4,
         type: 3}
+      propertyPath: baseGrowthRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763286058632883702, guid: 160451156c2df544bb96cf7f6fc6c4a4,
+        type: 3}
       propertyPath: onGrowthStageIncrease.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}

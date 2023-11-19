@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         UpdateText(currentWeatherText, "Weather: ", WeatherSystem.Instance.GetCurrentWeather().ToString());
         int growthStage = plantGrowthSystem.GetCurrentStage() + 1;
         UpdateText(plantStageText, "Plant Stage: ", growthStage.ToString());
-        growthBar.SetBar01(plantGrowthSystem.GetCurrentGrowth() / 100f);
+        growthBar.SetBar01(plantGrowthSystem.GetCurrentGrowthNormalized());
         healthBar.SetBar01(plantHealthSystem.GetHealth() / 100f);
         sunlightBar.SetBar01(ResourceManagementSystem.Instance.GetSunlightLevel() / 100f);
         waterBar.SetBar01(ResourceManagementSystem.Instance.GetWaterLevel() / 100f);

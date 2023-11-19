@@ -67,14 +67,26 @@ MonoBehaviour:
   - {fileID: 4999432885036584293}
   - {fileID: 3467091498945483099}
   - {fileID: 7524810542875945187}
-  baseGrowthRate: 1
+  baseGrowthRate: 5
   sunlightRequirement: 100
   waterRequirement: 20
   nutrientRequirement: 0
   weedGrowthPenalty: 0
   onGrowthStageIncrease:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6980263936505314260
 MonoBehaviour:
   m_ObjectHideFlags: 0
