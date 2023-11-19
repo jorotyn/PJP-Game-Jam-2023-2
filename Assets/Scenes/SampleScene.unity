@@ -171,12 +171,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2521703391732842833}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &327386960 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 243245013427435055, guid: 10912a6e9f330cd408ab3b4b0c7c313c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8209656211337127632}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &335840411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -326,11 +320,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9077797945349948603, guid: f96bb4af1cbb4d7499e6ab05c0159312,
-        type: 3}
-      propertyPath: onDepositWater.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 327386960}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

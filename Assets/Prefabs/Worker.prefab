@@ -429,6 +429,7 @@ MonoBehaviour:
   interactionRange: 1
   maxSunlightCapacity: 10
   depositRate: 2.5
+  wanderRadius: 5
 --- !u!114 &5656352194277528802
 MonoBehaviour:
   m_ObjectHideFlags: 0

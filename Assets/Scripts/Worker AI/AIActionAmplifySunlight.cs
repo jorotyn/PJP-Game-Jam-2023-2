@@ -9,6 +9,8 @@ public class AIActionAmplifySunlight : AIAction
     [SerializeField] private float interactionRange = 1f;
     [SerializeField] private float maxSunlightCapacity = 100f;
     [SerializeField] private float depositRate = 1f;
+
+    [SerializeField] private float wanderRadius = 5f;
     #endregion
 
     #region Private Fields
@@ -111,6 +113,28 @@ public class AIActionAmplifySunlight : AIAction
         ResourceManagementSystem.Instance.DecrementSunlightAmplifiers();
         depositingSunlight = false;
         sunlightCoroutine = null;
+        Wander();
+    }
+
+    private void Wander()
+    {
+        Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+        navMeshAgent.SetDestination(newPos);
+    }
+    #endregion
+
+    #region Utility Methods
+    private static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+
+        randDirection += origin;
+
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
     }
     #endregion
 }
