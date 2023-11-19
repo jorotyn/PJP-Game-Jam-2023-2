@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weedPrefab: {fileID: 9060901498363924049, guid: 5487db59750bd504cb3c22bccf255ff7,
     type: 3}
-  baseGrowthRate: 1
+  baseGrowthRate: 0.5
   minSpawnTime: 1
   maxSpawnTime: 5
   rainSpawnMultiplier: 1.5

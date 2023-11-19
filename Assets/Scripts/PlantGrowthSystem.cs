@@ -12,6 +12,7 @@ public class PlantGrowthSystem : MonoBehaviour
     [SerializeField] private float weedGrowthPenalty;
 
     [SerializeField] private UnityEvent onGrowthStageIncrease;
+    [SerializeField] private UnityEvent onFullyGrown;
     #endregion
 
     #region Private Fields
@@ -70,6 +71,11 @@ public class PlantGrowthSystem : MonoBehaviour
         if (currentGrowth >= GetGrowthThresholdForStage(currentStage))
         {
             TransitionToNextStage();
+            // Check if the plant has reached its final stage
+            if (currentStage == growthStagesModels.Length - 1)
+            {
+                onFullyGrown.Invoke();
+            }
         }
     }
 

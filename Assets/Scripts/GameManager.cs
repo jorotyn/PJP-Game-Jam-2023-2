@@ -2,92 +2,110 @@ using MoreMountains.Tools;
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MMSingleton<GameManager>
 {
-	public void SaveGameSettings()
-	{
-		GameSettingsWrapper gameSettings = new GameSettingsWrapper();
-		AudioManager.Instance.GetSettings(gameSettings);
-		if (Application.platform == RuntimePlatform.WebGLPlayer)
-		{
-			SaveUserPrefs(gameSettings);
-		}
-		else
-		{
-			string json = JsonUtility.ToJson(gameSettings, true);
-			File.WriteAllText(_settingsFile, json);
-		}
-	}
+    [SerializeField] private UnityEvent onRestart;
 
-	private readonly string _settingsFile = "settings.txt";
+    public void SaveGameSettings()
+    {
+        GameSettingsWrapper gameSettings = new GameSettingsWrapper();
+        AudioManager.Instance.GetSettings(gameSettings);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            SaveUserPrefs(gameSettings);
+        }
+        else
+        {
+            string json = JsonUtility.ToJson(gameSettings, true);
+            File.WriteAllText(_settingsFile, json);
+        }
+    }
 
-	protected override void Awake()
-	{
-		base.Awake();
-		LoadGameSettings();
-	}
+    private readonly string _settingsFile = "settings.txt";
 
-	public void LoadGameSettings()
-	{
-		GameSettingsWrapper gameSettings;
-		if (Application.platform == RuntimePlatform.WebGLPlayer)
-		{
-			gameSettings = LoadUserPrefs();
-		}
-		else
-		{
-			gameSettings = LoadSettingsFile();
-		}
-		AudioManager.Instance.SetSettings(gameSettings);
-	}
+    protected override void Awake()
+    {
+        base.Awake();
+        LoadGameSettings();
+    }
 
-	private GameSettingsWrapper DefaultSettings()
-	{
-		GameSettingsWrapper settings = new GameSettingsWrapper();
-		settings.MasterVolume = 1.0f;
-		settings.MusicVolume = 1.0f;
-		return settings;
-	}
+    public void LoadGameSettings()
+    {
+        GameSettingsWrapper gameSettings;
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            gameSettings = LoadUserPrefs();
+        }
+        else
+        {
+            gameSettings = LoadSettingsFile();
+        }
+        AudioManager.Instance.SetSettings(gameSettings);
+    }
 
-	private GameSettingsWrapper LoadSettingsFile()
-	{
-		GameSettingsWrapper settings;
-		string file;
-		try
-		{
-			file = File.ReadAllText(_settingsFile);
-		}
-		catch (Exception e) when (e is IOException ||
-									e is FileNotFoundException)
-		{
-			return DefaultSettings();
-		}
+    private GameSettingsWrapper DefaultSettings()
+    {
+        GameSettingsWrapper settings = new GameSettingsWrapper();
+        settings.MasterVolume = 1.0f;
+        settings.MusicVolume = 1.0f;
+        return settings;
+    }
 
-		try
-		{
-			settings = JsonUtility.FromJson<GameSettingsWrapper>(file);
-		}
-		catch
-		{
-			return DefaultSettings();
-		}
+    private GameSettingsWrapper LoadSettingsFile()
+    {
+        GameSettingsWrapper settings;
+        string file;
+        try
+        {
+            file = File.ReadAllText(_settingsFile);
+        }
+        catch (Exception e) when (e is IOException ||
+                                    e is FileNotFoundException)
+        {
+            return DefaultSettings();
+        }
 
-		return settings;
-	}
+        try
+        {
+            settings = JsonUtility.FromJson<GameSettingsWrapper>(file);
+        }
+        catch
+        {
+            return DefaultSettings();
+        }
 
-	private GameSettingsWrapper LoadUserPrefs()
-	{
-		GameSettingsWrapper gameSettings = new GameSettingsWrapper();
-		gameSettings.MasterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
-		gameSettings.MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
-		return gameSettings;
-	}
+        return settings;
+    }
 
-	private void SaveUserPrefs(GameSettingsWrapper gameSettings)
-	{
-		PlayerPrefs.SetFloat("MasterVolume", gameSettings.MasterVolume);
-		PlayerPrefs.SetFloat("MusicVolume", gameSettings.MusicVolume);
-		PlayerPrefs.Save();
-	}
+    private GameSettingsWrapper LoadUserPrefs()
+    {
+        GameSettingsWrapper gameSettings = new GameSettingsWrapper();
+        gameSettings.MasterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+        gameSettings.MusicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        return gameSettings;
+    }
+
+    private void SaveUserPrefs(GameSettingsWrapper gameSettings)
+    {
+        PlayerPrefs.SetFloat("MasterVolume", gameSettings.MasterVolume);
+        PlayerPrefs.SetFloat("MusicVolume", gameSettings.MusicVolume);
+        PlayerPrefs.Save();
+    }
+
+    public void LoseGame()
+    {
+        UIManager.Instance.ShowLose();
+    }
+
+    public void WinGame()
+    {
+        UIManager.Instance.ShowWin();
+    }
+
+    public void RestartGame()
+    {
+        onRestart.Invoke();
+    }
 }

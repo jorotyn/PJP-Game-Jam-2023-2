@@ -2,7 +2,7 @@ using MoreMountains.Tools;
 using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MMSingleton<UIManager>
 {
     #region Serialized Fields
     [Header("References")]
@@ -25,9 +25,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI workersCollectingNutrientsText;
     [SerializeField] private TextMeshProUGUI workersCollectingWaterText;
     [SerializeField] private TextMeshProUGUI workersAmplifyingSunlightText;
+
+    [SerializeField] private GameObject workerPanel;
+    [SerializeField] private GameObject infoPanel;
+    [SerializeField] private GameObject timePanel;
+    [SerializeField] private GameObject losePanel;
+    [SerializeField] private GameObject winPanel;
     #endregion
 
     #region Unity Lifecycle
+    private void Start()
+    {
+        workerPanel.SetActive(true);
+        infoPanel.SetActive(true);
+        timePanel.SetActive(true);
+        losePanel.SetActive(false);
+        winPanel.SetActive(false);
+    }
+
     private void Update()
     {
         UpdateInformationUI();
@@ -67,6 +82,26 @@ public class UIManager : MonoBehaviour
         {
             textElement.text = prefix + value;
         }
+    }
+    #endregion
+
+    #region Public Methods
+    public void ShowWin()
+    {
+        workerPanel.SetActive(false);
+        infoPanel.SetActive(false);
+        timePanel.SetActive(false);
+        losePanel.SetActive(false);
+        winPanel.SetActive(true);
+    }
+
+    public void ShowLose()
+    {
+        workerPanel.SetActive(false);
+        infoPanel.SetActive(false);
+        timePanel.SetActive(false);
+        losePanel.SetActive(true);
+        winPanel.SetActive(false);
     }
     #endregion
 }
