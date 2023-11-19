@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineVirtualCamera: {fileID: 8346445502741994472}
   useEdgeScrolling: 0
-  useDragPan: 1
+  useDragPan: 0
   panSpeedMin: 20
   panSpeedMax: 100
   dragPanSpeedMin: 2
