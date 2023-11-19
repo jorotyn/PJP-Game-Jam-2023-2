@@ -48,4 +48,5 @@ MonoBehaviour:
     type: 3}
   spawnAreaMin: {x: -23, y: -23}
   spawnAreaMax: {x: 23, y: 23}
-  initialWater: 10
+  initialWater: 3
+  spawnInterval: 20

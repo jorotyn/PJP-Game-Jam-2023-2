@@ -48,5 +48,5 @@ MonoBehaviour:
     type: 3}
   spawnAreaMin: {x: -23, y: -23}
   spawnAreaMax: {x: 23, y: 23}
-  initialNutrients: 10
-  spawnInterval: 15
+  initialNutrients: 3
+  spawnInterval: 25
