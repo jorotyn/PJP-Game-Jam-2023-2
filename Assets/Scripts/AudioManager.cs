@@ -1,4 +1,5 @@
 using MoreMountains.Tools;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,9 @@ public class AudioManager : MMSingleton<AudioManager>
 {
     [SerializeField][Range(0f, 1f)] private float _masterVolume = 0.25f;
     [SerializeField][Range(0f, 1f)] private float _musicVolume = 1.0f;
-    [SerializeField] private AudioClip _musicClip;
-    [SerializeField] private bool playOnAwake = false;
+    [SerializeField] private List<AudioSource> musicTracks = new List<AudioSource>();
+    [SerializeField] private bool playMusicOnAwake = true;
+    [SerializeField] private float pauseBetweenTracks = 5f;
     [SerializeField] private AudioSource waterDepositAudioSource;
     [SerializeField] private AudioSource waterCollectAudioSource;
     [SerializeField] private AudioSource nutrientDepositAudioSource;
@@ -108,16 +110,9 @@ public class AudioManager : MMSingleton<AudioManager>
 
     private void Start()
     {
-        if (_musicObject == null && _musicClip != null)
+        if (playMusicOnAwake)
         {
-            _musicObject = new GameObject();
-            _musicObject.name = "GameMusic";
-            _musicObject.AddComponent<AudioSource>();
-            AudioSource musicSource = _musicObject.GetComponent<AudioSource>();
-            musicSource.clip = _musicClip;
-            musicSource.loop = true;
-            musicSource.volume = _masterVolume * _musicVolume;
-            if (playOnAwake) musicSource.Play();
+            StartCoroutine(PlayMusicTracks());
         }
     }
 
@@ -137,6 +132,25 @@ public class AudioManager : MMSingleton<AudioManager>
                 _audioObjects.RemoveAt(i);
                 continue;
             }
+        }
+    }
+
+    private IEnumerator PlayMusicTracks()
+    {
+        int currentTrackIndex = 0;
+
+        while (true)
+        {
+            if (musicTracks.Count == 0)
+                yield break;
+
+            AudioSource currentTrack = musicTracks[currentTrackIndex];
+            currentTrack.volume = _masterVolume * _musicVolume;
+            currentTrack.Play();
+
+            yield return new WaitForSeconds(currentTrack.clip.length + pauseBetweenTracks);
+
+            currentTrackIndex = (currentTrackIndex + 1) % musicTracks.Count;
         }
     }
 }
