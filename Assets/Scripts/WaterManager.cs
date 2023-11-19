@@ -1,4 +1,5 @@
 using MoreMountains.Tools;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +10,13 @@ public class WaterManager : MMSingleton<WaterManager>
     [SerializeField] private Vector2 spawnAreaMin;
     [SerializeField] private Vector2 spawnAreaMax;
     [SerializeField] private int initialWater = 2;
+    [SerializeField] private float spawnInterval = 5f;
     #endregion
 
     #region Private Fields
     private List<Water> waterComponents = new List<Water>();
     private int totalWater;
+    private Coroutine spawnCoroutine;
     #endregion
 
     #region Unity Lifecycle
@@ -30,6 +33,18 @@ public class WaterManager : MMSingleton<WaterManager>
 
         for (int i = 0; i < initialWater; i++)
         {
+            Vector3 spawnPosition = RandomPosition();
+            SpawnWater(spawnPosition);
+        }
+    }
+    #endregion
+
+    #region Private Methods
+    private IEnumerator SpawnWaterOverTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnInterval);
             Vector3 spawnPosition = RandomPosition();
             SpawnWater(spawnPosition);
         }
@@ -73,6 +88,23 @@ public class WaterManager : MMSingleton<WaterManager>
     public List<Water> GetAllWaterComponents()
     {
         return waterComponents;
+    }
+
+    public void StartSpawningWater()
+    {
+        if (spawnCoroutine == null)
+        {
+            spawnCoroutine = StartCoroutine(SpawnWaterOverTime());
+        }
+    }
+
+    public void StopSpawningWater()
+    {
+        if (spawnCoroutine != null)
+        {
+            StopCoroutine(spawnCoroutine);
+            spawnCoroutine = null;
+        }
     }
     #endregion
 

@@ -10989,6 +10989,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1932693124110824344}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1932693124110824346 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4852461469245828765, guid: 0742f32983df26c4bad6f672d068c096,
+    type: 3}
+  m_PrefabInstance: {fileID: 1932693124110824344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30beffd8b9a5fc24fa3b32aa28727ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2310149553997142107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11501,14 +11513,29 @@ PrefabInstance:
       objectReference: {fileID: 235822684}
     - target: {fileID: 555045705992801554, guid: f25fcf63b1cc2d74b94450b3e2e42405,
         type: 3}
+      propertyPath: onSunnyWeatherStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1932693124110824346}
+    - target: {fileID: 555045705992801554, guid: f25fcf63b1cc2d74b94450b3e2e42405,
+        type: 3}
       propertyPath: onRainingWeatherStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 235822683}
     - target: {fileID: 555045705992801554, guid: f25fcf63b1cc2d74b94450b3e2e42405,
         type: 3}
+      propertyPath: onRainingWeatherStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1932693124110824346}
+    - target: {fileID: 555045705992801554, guid: f25fcf63b1cc2d74b94450b3e2e42405,
+        type: 3}
       propertyPath: onOvercastWeatherStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 235822684}
+    - target: {fileID: 555045705992801554, guid: f25fcf63b1cc2d74b94450b3e2e42405,
+        type: 3}
+      propertyPath: onOvercastWeatherStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1932693124110824346}
     - target: {fileID: 2173259688649012548, guid: f25fcf63b1cc2d74b94450b3e2e42405,
         type: 3}
       propertyPath: m_LocalPosition.x
