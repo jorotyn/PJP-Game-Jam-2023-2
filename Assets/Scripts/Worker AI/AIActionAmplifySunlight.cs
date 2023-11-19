@@ -65,6 +65,11 @@ public class AIActionAmplifySunlight : AIAction
             float sunlightLevel = ResourceManagementSystem.Instance.GetSunlightLevel();
 
             sunlightCollected += sunlightLevel / 100f * Time.deltaTime;
+
+            if (sunlightCollected >= maxSunlightCapacity)
+            {
+                AudioManager.Instance.PlaySunlightCollect();
+            }
         }
     }
 
@@ -95,6 +100,8 @@ public class AIActionAmplifySunlight : AIAction
 
     private IEnumerator ReduceSunlightOverTime()
     {
+        AudioManager.Instance.PlaySunlightDeposit();
+
         while (sunlightCollected > 0f)
         {
             sunlightCollected -= depositRate * Time.deltaTime;

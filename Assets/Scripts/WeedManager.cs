@@ -95,6 +95,7 @@ public class WeedManager : MMSingleton<WeedManager>
         totalWeeds++;
         currentGrowth = 0f;
         SetNextSpawnLevel();
+        AudioManager.Instance.PlayWeedSpawn();
     }
     #endregion
 

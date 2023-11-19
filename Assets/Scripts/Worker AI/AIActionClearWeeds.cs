@@ -91,6 +91,7 @@ public class AIActionClearWeeds : AIAction
                 nearestWeed.Interact();
                 nearestWeed.Unlock();
                 nearestWeed = null;
+                AudioManager.Instance.PlayWeedCut();
             }
         }
     }

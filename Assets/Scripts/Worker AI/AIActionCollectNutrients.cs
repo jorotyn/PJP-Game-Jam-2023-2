@@ -109,6 +109,7 @@ public class AIActionCollectNutrients : AIAction
                 nearestNutrient.Unlock();
                 nearestNutrient = null;
                 nutrientCollected = true;
+                AudioManager.Instance.PlayNutrientCollect();
             }
         }
     }
@@ -131,6 +132,7 @@ public class AIActionCollectNutrients : AIAction
                 ResourceManagementSystem.Instance.AddNutrients(nutrientsCollected);
                 nutrientCollected = false;
                 nutrientsCollected = 0f;
+                AudioManager.Instance.PlayNutrientDeposit();
             }
         }
     }

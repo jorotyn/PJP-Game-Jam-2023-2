@@ -102,6 +102,7 @@ public class AIActionCollectWater : AIAction
                 nearestWater.Unlock();
                 nearestWater = null;
                 isWaterCollected = true;
+                AudioManager.Instance.PlayWaterCollect();
             }
         }
     }
@@ -124,6 +125,7 @@ public class AIActionCollectWater : AIAction
                 ResourceManagementSystem.Instance.AddWater(waterAmountCollected);
                 isWaterCollected = false;
                 waterAmountCollected = 0f;
+                AudioManager.Instance.PlayWaterDeposit();
             }
         }
     }

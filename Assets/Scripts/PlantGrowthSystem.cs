@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlantGrowthSystem : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlantGrowthSystem : MonoBehaviour
     [SerializeField] private float waterRequirement;
     [SerializeField] private float nutrientRequirement;
     [SerializeField] private float weedGrowthPenalty;
+
+    [SerializeField] private UnityEvent onGrowthStageIncrease;
     #endregion
 
     #region Private Fields
@@ -75,7 +78,7 @@ public class PlantGrowthSystem : MonoBehaviour
         currentStage++;
         currentGrowth = 0f;
         UpdatePlantAppearance();
-
+        onGrowthStageIncrease.Invoke();
         // To do: Trigger particle effects here
     }
 

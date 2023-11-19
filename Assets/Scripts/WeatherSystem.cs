@@ -21,6 +21,7 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
     private float nextWeatherChange;
     private bool isOvercast;
     private bool isRaining;
+    private bool weatherChanged;
     #endregion
 
     #region Unity Lifecycle
@@ -58,6 +59,8 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
 
     private void ApplyWeatherEffects()
     {
+        if (!weatherChanged) return;
+
         switch (currentWeather)
         {
             case WeatherType.Sunny:
@@ -76,6 +79,8 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
                 onRainingWeatherStart.Invoke();
                 break;
         }
+
+        weatherChanged = false;
     }
 
     private void SetRandomWeather()
@@ -88,6 +93,7 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
         } while (newWeather == currentWeather);
 
         currentWeather = newWeather;
+        weatherChanged = true;
     }
 
     private void SetNextWeatherChange()
