@@ -7,6 +7,10 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
     public enum WeatherType { Sunny, Overcast, Raining }
 
     #region Serialized Fields
+    [Header("References")]
+    [SerializeField] private ParticleSystem rainParticleSystem;
+
+    [Header("Settings")]
     [SerializeField] private float minWeatherDuration = 10f;
     [SerializeField] private float maxWeatherDuration = 30f;
 
@@ -42,6 +46,7 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
     {
         SetRandomWeather();
         SetNextWeatherChange();
+        StopRainParticleSystem();
     }
     #endregion
 
@@ -67,16 +72,19 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
                 isRaining = false;
                 isOvercast = false;
                 onSunnyWeatherStart.Invoke();
+                StopRainParticleSystem();
                 break;
             case WeatherType.Overcast:
                 isRaining = false;
                 isOvercast = true;
                 onOvercastWeatherStart.Invoke();
+                StopRainParticleSystem();
                 break;
             case WeatherType.Raining:
                 isRaining = true;
                 isOvercast = true;
                 onRainingWeatherStart.Invoke();
+                StartRainParticleSystem();
                 break;
         }
 
@@ -100,6 +108,22 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
     {
         weatherTimer = 0f;
         nextWeatherChange = Random.Range(minWeatherDuration, maxWeatherDuration);
+    }
+
+    private void StartRainParticleSystem()
+    {
+        if (rainParticleSystem != null && !rainParticleSystem.isPlaying)
+        {
+            rainParticleSystem.Play();
+        }
+    }
+
+    private void StopRainParticleSystem()
+    {
+        if (rainParticleSystem != null && rainParticleSystem.isPlaying)
+        {
+            rainParticleSystem.Stop();
+        }
     }
     #endregion
 
