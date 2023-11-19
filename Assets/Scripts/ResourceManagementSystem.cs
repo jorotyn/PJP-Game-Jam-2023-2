@@ -4,6 +4,14 @@ using UnityEngine;
 public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
 {
     #region Serialized Fields
+    [SerializeField] private Light directionalLight;
+    [SerializeField] private float sunriseAngle = 0f;
+    [SerializeField] private float zenithAngle = 90f;
+    [SerializeField] private float sunsetAngle = 180f;
+    [SerializeField] private float maxLightIntensity = 1f;
+    [SerializeField] private float minLightIntensity = 0.3f;
+    [SerializeField] private float intensityTransitionSpeed = 0.1f;
+
     [SerializeField] private float waterConsumptionRate = 1f;
     [SerializeField] private float nutrientConsumptionRate = 1f;
     [SerializeField] private float maxResourceLevel = 100f;
@@ -20,6 +28,7 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
     private bool isRaining;
     private bool isOvercast;
     private int countOfSunlightAmplifiers;
+    private float targetIntensity;
     #endregion
 
     #region Unity Lifecycle
@@ -60,15 +69,40 @@ public class ResourceManagementSystem : MMSingleton<ResourceManagementSystem>
 
     private void UpdateSunlight()
     {
-        if (isOvercast)
+        // Calculate base sunlight level
+        float newSunlightLevel = Mathf.PingPong(Time.time, maxResourceLevel);
+
+        // Determine AM or PM phase
+        bool isAM = newSunlightLevel >= sunlightLevel; // AM if the new level is higher or equal to the previous
+        sunlightLevel = newSunlightLevel;
+
+        // Adjust sunlight level for overcast
+        float adjustedSunlightLevel = isOvercast ? sunlightLevel * (1 - overcastSunlightReduction) : sunlightLevel;
+
+        // Calculate sun rotation based on sunlight level
+        float sunRotation;
+        if (isAM)
         {
-            sunlightLevel = Mathf.PingPong(Time.time, maxResourceLevel) * (1 - overcastSunlightReduction);
+            // From sunrise to zenith
+            sunRotation = Mathf.Lerp(sunriseAngle, zenithAngle, sunlightLevel / maxResourceLevel);
         }
         else
         {
-            sunlightLevel = Mathf.PingPong(Time.time, maxResourceLevel);
+            // From zenith to sunset
+            sunRotation = Mathf.Lerp(zenithAngle, sunsetAngle, 1 - (sunlightLevel / maxResourceLevel));
+        }
+
+        // Calculate target light intensity based on overcast
+        targetIntensity = isOvercast ? Mathf.Lerp(minLightIntensity, maxLightIntensity, 1 - overcastSunlightReduction) : maxLightIntensity;
+
+        // Smoothly interpolate the light's intensity towards the target
+        if (directionalLight != null)
+        {
+            directionalLight.intensity = Mathf.Lerp(directionalLight.intensity, targetIntensity, intensityTransitionSpeed * Time.deltaTime);
+            directionalLight.transform.rotation = Quaternion.Euler(sunRotation, 0, 0);
         }
     }
+
 
     private void UpdateWaterLevel()
     {

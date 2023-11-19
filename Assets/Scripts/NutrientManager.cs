@@ -1,4 +1,5 @@
 using MoreMountains.Tools;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class NutrientManager : MMSingleton<NutrientManager>
     [SerializeField] private Vector2 spawnAreaMin;
     [SerializeField] private Vector2 spawnAreaMax;
     [SerializeField] private int initialNutrients = 10;
+    [SerializeField] private float spawnInterval = 5f;
     #endregion
 
     #region Private Fields
@@ -20,6 +22,7 @@ public class NutrientManager : MMSingleton<NutrientManager>
     private void Start()
     {
         InitializeNutrients();
+        StartCoroutine(SpawnNutrientsOverTime());
     }
     #endregion
 
@@ -30,6 +33,18 @@ public class NutrientManager : MMSingleton<NutrientManager>
 
         for (int i = 0; i < initialNutrients; i++)
         {
+            Vector3 spawnPosition = RandomPosition();
+            SpawnNutrient(spawnPosition);
+        }
+    }
+    #endregion
+
+    #region Private Methods
+    private IEnumerator SpawnNutrientsOverTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnInterval);
             Vector3 spawnPosition = RandomPosition();
             SpawnNutrient(spawnPosition);
         }

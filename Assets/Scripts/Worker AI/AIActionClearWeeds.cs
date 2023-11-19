@@ -7,11 +7,18 @@ public class AIActionClearWeeds : AIAction
 {
     #region Serialized Fields
     [SerializeField] private float interactionRange = 1f;
+
+    [SerializeField] private float wanderRadius = 5f;
+    [SerializeField] private float minWanderTimer = 0f;
+    [SerializeField] private float maxWanderTimer = 5f;
     #endregion
 
     #region Private Fields
     private NavMeshAgent navMeshAgent;
     private Weed nearestWeed;
+
+    private float timer;
+    private float wanderTimer;
     #endregion
 
     #region Lifecycle
@@ -78,6 +85,11 @@ public class AIActionClearWeeds : AIAction
                 navMeshAgent.SetDestination(nearestWeed.transform.position);
             }
         }
+
+        if (nearestWeed == null)
+        {
+            Wander();
+        }
     }
 
     private void RemoveNearestWeed()
@@ -91,8 +103,42 @@ public class AIActionClearWeeds : AIAction
                 nearestWeed.Interact();
                 nearestWeed.Unlock();
                 nearestWeed = null;
+                AudioManager.Instance.PlayWeedCut();
             }
         }
+    }
+
+    private void Wander()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= wanderTimer)
+        {
+            Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+            navMeshAgent.SetDestination(newPos);
+            timer = 0;
+            RandomizeWanderTimer();
+        }
+    }
+    #endregion
+
+    #region Utility Methods
+    private static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+
+        randDirection += origin;
+
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+        return navHit.position;
+    }
+
+    private void RandomizeWanderTimer()
+    {
+        wanderTimer = Random.Range(minWanderTimer, maxWanderTimer);
     }
     #endregion
 }

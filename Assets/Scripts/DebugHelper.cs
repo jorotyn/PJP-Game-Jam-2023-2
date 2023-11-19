@@ -19,21 +19,12 @@ public class DebugHelper : MonoBehaviour
     [SerializeField] private TextMeshProUGUI plantHealthText;
     [SerializeField] private TextMeshProUGUI numberOfWeedsText;
     [SerializeField] private TextMeshProUGUI numberOfWorkersText;
-
-    [Header("Worker Elements")]
-    [SerializeField] private TextMeshProUGUI totalWorkersText;
-    [SerializeField] private TextMeshProUGUI idleWorkersText;
-    [SerializeField] private TextMeshProUGUI workersClearingWeedsText;
-    [SerializeField] private TextMeshProUGUI workersCollectingNutrientsText;
-    [SerializeField] private TextMeshProUGUI workersCollectingWaterText;
-    [SerializeField] private TextMeshProUGUI workersAmplifyingSunlightText;
     #endregion
 
     #region Unity Lifecycle
     private void Update()
     {
         UpdateDebugUI();
-        UpdateWorkerUI();
     }
     #endregion
 
@@ -50,17 +41,6 @@ public class DebugHelper : MonoBehaviour
         UpdateText(plantHealthText, "Plant Health: ", plantHealthSystem.GetHealth().ToString("F1"));
         UpdateText(numberOfWeedsText, "Number of Weeds: ", WeedManager.Instance.GetTotalWeeds().ToString());
         UpdateText(numberOfWorkersText, "Number of Workers: ", WorkerManager.Instance.GetTotalWorkers().ToString());
-    }
-
-    private void UpdateWorkerUI()
-    {
-        WorkerManager workerManager = WorkerManager.Instance;
-        UpdateText(totalWorkersText, "Total Workers: ", workerManager.GetTotalWorkers().ToString());
-        UpdateText(idleWorkersText, "Idle Workers: ", workerManager.GetIdleWorkerCount().ToString());
-        UpdateText(workersClearingWeedsText, "Workers Clearing Weeds: ", workerManager.GetWorkersClearingWeeds().ToString());
-        UpdateText(workersCollectingNutrientsText, "Workers Collecting Nutrients: ", workerManager.GetWorkersCollectingNutrients().ToString());
-        UpdateText(workersCollectingWaterText, "Workers Collecting Water: ", workerManager.GetWorkersCollectingWater().ToString());
-        UpdateText(workersAmplifyingSunlightText, "Workers Amplifying Sunlight: ", workerManager.GetWorkersAmplifyingSunlight().ToString());
     }
     #endregion
 

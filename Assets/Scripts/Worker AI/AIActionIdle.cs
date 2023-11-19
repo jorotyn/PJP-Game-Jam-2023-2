@@ -5,9 +5,9 @@ using UnityEngine.AI;
 public class AIActionIdle : AIAction
 {
     #region Serialized Fields
-    [SerializeField] private float wanderRadius;
-    [SerializeField] private float minWanderTimer;
-    [SerializeField] private float maxWanderTimer;
+    [SerializeField] private float wanderRadius = 5f;
+    [SerializeField] private float minWanderTimer = 0f;
+    [SerializeField] private float maxWanderTimer = 5f;
     #endregion
 
     #region Private Fields

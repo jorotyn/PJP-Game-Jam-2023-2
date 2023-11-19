@@ -7,6 +7,10 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
     public enum WeatherType { Sunny, Overcast, Raining }
 
     #region Serialized Fields
+    [Header("References")]
+    [SerializeField] private ParticleSystem rainParticleSystem;
+
+    [Header("Settings")]
     [SerializeField] private float minWeatherDuration = 10f;
     [SerializeField] private float maxWeatherDuration = 30f;
 
@@ -21,6 +25,7 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
     private float nextWeatherChange;
     private bool isOvercast;
     private bool isRaining;
+    private bool weatherChanged;
     #endregion
 
     #region Unity Lifecycle
@@ -41,6 +46,8 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
     {
         SetRandomWeather();
         SetNextWeatherChange();
+        StopRainParticleSystem();
+        weatherChanged = true;
     }
     #endregion
 
@@ -58,24 +65,31 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
 
     private void ApplyWeatherEffects()
     {
+        if (!weatherChanged) return;
+
         switch (currentWeather)
         {
             case WeatherType.Sunny:
                 isRaining = false;
                 isOvercast = false;
                 onSunnyWeatherStart.Invoke();
+                StopRainParticleSystem();
                 break;
             case WeatherType.Overcast:
                 isRaining = false;
                 isOvercast = true;
                 onOvercastWeatherStart.Invoke();
+                StopRainParticleSystem();
                 break;
             case WeatherType.Raining:
                 isRaining = true;
                 isOvercast = true;
                 onRainingWeatherStart.Invoke();
+                StartRainParticleSystem();
                 break;
         }
+
+        weatherChanged = false;
     }
 
     private void SetRandomWeather()
@@ -88,12 +102,29 @@ public class WeatherSystem : MMSingleton<WeatherSystem>
         } while (newWeather == currentWeather);
 
         currentWeather = newWeather;
+        weatherChanged = true;
     }
 
     private void SetNextWeatherChange()
     {
         weatherTimer = 0f;
         nextWeatherChange = Random.Range(minWeatherDuration, maxWeatherDuration);
+    }
+
+    private void StartRainParticleSystem()
+    {
+        if (rainParticleSystem != null && !rainParticleSystem.isPlaying)
+        {
+            rainParticleSystem.Play();
+        }
+    }
+
+    private void StopRainParticleSystem()
+    {
+        if (rainParticleSystem != null && rainParticleSystem.isPlaying)
+        {
+            rainParticleSystem.Stop();
+        }
     }
     #endregion
 
