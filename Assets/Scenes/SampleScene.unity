@@ -11247,6 +11247,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 899955441}
     m_Modifications:
+    - target: {fileID: 1270986400194568959, guid: a717d8aa5d9640949b06185f1647b08b,
+        type: 3}
+      propertyPath: directionalLight
+      value: 
+      objectReference: {fileID: 705507994}
     - target: {fileID: 1446097861249616781, guid: a717d8aa5d9640949b06185f1647b08b,
         type: 3}
       propertyPath: m_Name

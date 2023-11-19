@@ -44,6 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976c35e761bfabd4dbaa2dd2b4a7a656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directionalLight: {fileID: 0}
+  sunriseAngle: 0
+  zenithAngle: 90
+  sunsetAngle: 180
+  maxLightIntensity: 1
+  minLightIntensity: 0.3
+  intensityTransitionSpeed: 1
   waterConsumptionRate: 1
   nutrientConsumptionRate: 1
   maxResourceLevel: 100
