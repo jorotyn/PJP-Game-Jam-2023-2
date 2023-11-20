@@ -68,10 +68,10 @@ MonoBehaviour:
   - {fileID: 3467091498945483099}
   - {fileID: 7524810542875945187}
   baseGrowthRate: 5
-  sunlightRequirement: 100
+  sunlightRequirement: 80
   waterRequirement: 20
-  nutrientRequirement: 0
-  weedGrowthPenalty: 0
+  nutrientRequirement: 20
+  weedGrowthPenalty: 100
   onGrowthStageIncrease:
     m_PersistentCalls:
       m_Calls:
@@ -87,6 +87,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onFullyGrown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6980263936505314260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,11 +104,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthRegenerationRate: 5
-  healthDegenerationRate: 5
-  sunlightThreshold: 0
-  waterThreshold: 0
-  sunlightTimeThreshold: 10
-  waterTimeThreshold: 10
+  healthDegenerationRate: 3
+  sunlightThreshold: 2
+  waterThreshold: 10
+  sunlightTimeThreshold: 3
+  waterTimeThreshold: 1
   onHealthDecreaseStart:
     m_PersistentCalls:
       m_Calls: []

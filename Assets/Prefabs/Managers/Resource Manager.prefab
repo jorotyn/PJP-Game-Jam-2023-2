@@ -52,9 +52,9 @@ MonoBehaviour:
   minLightIntensity: 0.3
   intensityTransitionSpeed: 1
   waterConsumptionRate: 2
-  nutrientConsumptionRate: 3
+  nutrientConsumptionRate: 2
   maxResourceLevel: 100
   rainWaterIncreaseRate: 4
   overcastSunlightReduction: 0.5
-  initialWaterLevel: 0
-  initialNutrientLevel: 0
+  initialWaterLevel: 20
+  initialNutrientLevel: 20

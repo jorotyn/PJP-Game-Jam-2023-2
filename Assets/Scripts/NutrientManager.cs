@@ -9,7 +9,7 @@ public class NutrientManager : MMSingleton<NutrientManager>
     [SerializeField] private GameObject nutrientPrefab;
     [SerializeField] private Vector2 spawnAreaMin;
     [SerializeField] private Vector2 spawnAreaMax;
-    [SerializeField] private int initialNutrients = 10;
+    [SerializeField] private int initialNutrients = 100;
     [SerializeField] private float spawnInterval = 5f;
     #endregion
 

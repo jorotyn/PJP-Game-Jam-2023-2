@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce779b64554e9ac4480dd4cfe18dedc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutrientValue: 10
+  nutrientValue: 15
 --- !u!1001 &2139908500588246927
 PrefabInstance:
   m_ObjectHideFlags: 0
