@@ -6595,7 +6595,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383882095}
-  - component: {fileID: 1383882096}
   m_Layer: 0
   m_Name: TerrainGroup_0
   m_TagString: Untagged
@@ -6619,18 +6618,6 @@ Transform:
   - {fileID: 850002921}
   m_Father: {fileID: 13417211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1383882096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1383882094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca34a6148db2d54493f84f379293f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1384892398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11833,7 +11820,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512589917}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13154,6 +13141,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Water Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852461469245828765, guid: 0742f32983df26c4bad6f672d068c096,
+        type: 3}
+      propertyPath: spawnInterval
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8508253923437667700, guid: 0742f32983df26c4bad6f672d068c096,
         type: 3}
